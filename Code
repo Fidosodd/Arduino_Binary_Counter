@@ -1,0 +1,121 @@
+// set pin numbers:
+const int buttonPin = 10;     // the number of the pushbutton pin
+const int pin1Pin =  9;       // output pin numbers
+const int pin2Pin =  8;
+const int pin4Pin =  7;
+const int pin8Pin =  6;
+const int pin16Pin =  5;
+const int pin32Pin =  4;
+const int pin64Pin =  3;
+const int pin128Pin =  2;
+
+// set variables
+int buttonState = 0;         // variable for reading the pushbutton status
+int value = 0;               // variable for determineing pin states
+int pin1state = 0;
+int pin128state = 0;
+int pin64state = 0;
+int pin32state = 0;
+int pin16state = 0;
+int pin8state = 0;
+int pin4state = 0;
+int pin2state = 0;
+int buttonconst = 0;
+
+void setup() {
+  // initialize the LED pin as an output:
+  pinMode(pin1Pin, OUTPUT);
+  pinMode(pin2Pin, OUTPUT); 
+  pinMode(pin4Pin, OUTPUT); 
+  pinMode(pin8Pin, OUTPUT); 
+  pinMode(pin16Pin, OUTPUT); 
+  pinMode(pin32Pin, OUTPUT); 
+  pinMode(pin64Pin, OUTPUT); 
+  pinMode(pin128Pin, OUTPUT); 
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);     
+}
+
+void loop(){
+  // read the state of the pushbutton value:
+  buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed.
+  // if it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    if (buttonconst == 0) {
+      buttonconst = 1;
+      value += 1;
+      delay(10);
+    }
+  }
+  else {
+    // reset the button so it can be pushed again
+    buttonconst = 0;
+  }
+  // calculate pin states
+  if (value >= 128) { 
+    digitalWrite(pin128Pin, HIGH);
+    pin128state = 128; 
+  } 
+  else {
+    digitalWrite(pin128Pin, LOW);
+    pin128state = 0;  
+  }
+  if (value >= 64 + pin128state) { 
+    digitalWrite(pin64Pin, HIGH);
+    pin64state = 64; 
+  } 
+  else {
+    digitalWrite(pin64Pin, LOW);
+    pin64state = 0;
+  }
+  if (value >= 32 + pin128state + pin64state) { 
+    digitalWrite(pin32Pin, HIGH);
+    pin32state = 32; 
+  } 
+  else {
+    digitalWrite(pin32Pin, LOW);
+    pin32state = 0;
+  }
+  if (value >= 16 + pin128state + pin64state + pin32state) { 
+    digitalWrite(pin16Pin, HIGH);
+    pin16state = 16; 
+  } 
+  else {
+    digitalWrite(pin16Pin, LOW);
+    pin16state = 0; 
+  }
+  if (value >= 8 + pin128state + pin64state + pin32state + pin16state) { 
+    digitalWrite(pin8Pin, HIGH);
+    pin8state = 8; 
+  } 
+  else {
+    digitalWrite(pin8Pin, LOW);
+    pin8state = 0; 
+  }
+  if (value >= 4 + pin128state + pin64state + pin32state + pin16state + pin8state) { 
+    digitalWrite(pin4Pin, HIGH);
+    pin4state = 4; 
+  } 
+  else {
+    digitalWrite(pin4Pin, LOW);
+    pin4state = 0; 
+  }
+  if (value >= 2 + pin128state + pin64state + pin32state + pin16state + pin8state + pin4state) { 
+    digitalWrite(pin2Pin, HIGH);
+    pin2state = 2; 
+  } 
+  else {
+    digitalWrite(pin2Pin, LOW);
+    pin2state = 0; 
+  }
+  if (value >= 1 + pin128state + pin64state + pin32state + pin16state + pin8state + pin4state + pin2state) { 
+    digitalWrite(pin1Pin, HIGH);
+    pin1state = 1; 
+  } 
+  else {
+    digitalWrite(pin1Pin, LOW);
+    pin1state = 0; 
+  }
+}
