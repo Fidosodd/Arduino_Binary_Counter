@@ -1,5 +1,5 @@
 // set pin numbers:
-const int buttonPin = 10;     // the number of the pushbutton pin
+const int buttonPin = 10;     // the number of the button pin
 const int pin1Pin =  9;       // output pin numbers
 const int pin2Pin =  8;
 const int pin4Pin =  7;
